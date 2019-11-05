@@ -31,7 +31,7 @@ namespace NLayersApp.Controllers.Controllers
             return result;
         }
 
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{Id}")]
         public async Task<TEntity> Get(TKey id)
         {
             var request = new ReadEntityRequest<TKey, TEntity>(id);
