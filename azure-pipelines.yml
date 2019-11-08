@@ -38,6 +38,11 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
+- task: MSBuild@1
+  inputs:
+    solution: '**/*.sln'
+    
+  
 - task: SonarCloudPrepare@1
   displayName: "SonarCloud Prepare"
   inputs:

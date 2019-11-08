@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNet.Security.OAuth.Validation;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -12,8 +14,6 @@ using NLayersApp.CQRS.Requests;
 namespace NLayersApp.Controllers.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
-    [BindProperties(SupportsGet = true)]
     [CommandControllerNameConvention(typeof(CommandController<, >))]
     public class CommandController<TKey, TEntity> : Controller
     {
@@ -39,6 +39,7 @@ namespace NLayersApp.Controllers.Controllers
             return result;
         }
 
+        [Authorize(AuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] TEntity value)
         {
@@ -52,6 +53,7 @@ namespace NLayersApp.Controllers.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(AuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
         public async Task<IActionResult> Put(TKey id, [FromBody] TEntity value)
         {
             if (!ModelState.IsValid)
@@ -64,6 +66,7 @@ namespace NLayersApp.Controllers.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(AuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
         public async Task<IActionResult> Delete(TKey id)
         {
             var request = new DeleteEntityRequest<TKey, TEntity>(id);
