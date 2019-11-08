@@ -38,6 +38,10 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
+- task: MSBuild@1
+  inputs:
+    solution: '**/*.sln'
+
 - task: NuGetCommand@2
   displayName: 'NuGet pack NLayersApp.Controllers project'
   inputs:
