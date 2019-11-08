@@ -41,26 +41,7 @@ steps:
 - task: MSBuild@1
   inputs:
     solution: '**/*.sln'
-    
-  
-- task: SonarCloudPrepare@1
-  displayName: "SonarCloud Prepare"
-  inputs:
-    SonarCloud: 'sonarcloud_org'
-    organization: '1206fcdc677b16cabb71232a3ca34c89bbb63be1'
-    scannerMode: 'MSBuild'
-    projectKey: 'nlayersapp.controllers'
-    projectName: 'nlayersapp.controllers'
 
-- task: SonarCloudAnalyze@1
-  displayName: "SonarCloud Analyze"
-
-- task: SonarCloudPublish@1
-  displayName: "SonarCloud Publish"
-  inputs:
-    pollingTimeoutSec: '300'
-
-  
 - task: NuGetCommand@2
   displayName: 'NuGet pack NLayersApp.Controllers project'
   inputs:
