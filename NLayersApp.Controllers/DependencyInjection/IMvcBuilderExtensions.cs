@@ -13,7 +13,6 @@ namespace NLayersApp.Controllers.DependencyInjection
         public static IMvcBuilder UseDynamicControllers(this IMvcBuilder builder, ITypesResolver typesResolver)
         {
             builder.Services.AddSwaggerDocument();
-            builder.Services.AddOpenApiDocument();
 
             return builder.ConfigureApplicationPartManager(
                     partManager =>
